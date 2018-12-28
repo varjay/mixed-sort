@@ -3,7 +3,7 @@ import sortzh from './sortzh'
 function switchkey (obj, sortName, sortName2) {
   let r
   let witch = obj[sortName]?sortName:sortName2
-  if (/^[a-zA-z]/.test(obj[witch] ? obj[witch] : '没有')) {
+  if (/^[a-zA-Z]/.test(obj[witch] ? obj[witch] : '没有')) {
     r = obj.en2zh
   } else {
     r = obj[witch]
@@ -33,8 +33,11 @@ function main (arr, [sortName, sortName2], isTag = 1) {
         let letter = arr[i][witch][0]
         let isIUV = 0
         switch (letter) {
+          case 'I':
           case 'i': iArr.push(arr[i]); isIUV = 1; break
+          case 'U':
           case 'u': uArr.push(arr[i]); isIUV = 1; break
+          case 'V':
           case 'v': vArr.push(arr[i]); isIUV = 1; break
         }
         if (isIUV) {

@@ -14,7 +14,7 @@ export default {
       data: [
         {
           'user_name': '周啊伦',
-          'user_alias': '阿伦',
+          'user_alias': 'V阿伦',
         },
         {
           'user_name': '周博伦',
