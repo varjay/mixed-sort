@@ -3,6 +3,9 @@ import sortzh from './sortzh'
 function switchkey (obj, sortName, sortName2) {
   let r
   let witch = obj[sortName]?sortName:sortName2
+  if (!witch) {
+    return ''
+  }
   if (/^[a-zA-Z]/.test(obj[witch] ? obj[witch] : '没有')) {
     r = obj.en2zh
   } else {
