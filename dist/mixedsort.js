@@ -1,6 +1,6 @@
 /*!
  * mixed-sort
- * @version 0.0.1
+ * @version 1.0.1
  * @see https://github.com/varjay/
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -108,12 +108,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sortzh__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
 
-function switchkey (obj, sortName) {
+function switchkey (obj, sortName, sortName2) {
   let r
-  if (/^[a-zA-z]/.test(obj[sortName] ? obj[sortName] : '没有')) {
+  let witch = obj[sortName]?sortName:sortName2
+  if (!witch) {
+    return ''
+  }
+  if (/^[a-zA-Z]/.test(obj[witch] ? obj[witch] : '没有')) {
     r = obj.en2zh
   } else {
-    r = obj[sortName]
+    r = obj[witch]
   }
   if (!r) {
     return obj.zh
@@ -121,7 +125,7 @@ function switchkey (obj, sortName) {
   return r
 }
 
-function main (arr, sortName, isTag = 1) {
+function main (arr, [sortName, sortName2], isTag = 1) {
   arr = arr.concat(_sortzh__WEBPACK_IMPORTED_MODULE_0__["default"])
   // 暂时无法对i u v 排序
   const LETTERS = 'abcdefghjklmnopqrstwxyz'.split('')
@@ -130,17 +134,21 @@ function main (arr, sortName, isTag = 1) {
   let uArr = [{zh: '存在', le: 'u'}]
   let vArr = [{zh: '存在', le: 'v'}]
   for (var i = arr.length - 1; i >= 0; i--) {
-    if (arr[i][sortName] && /^[a-zA-Z]/.test(arr[i][sortName])) {
-      let a = LETTERS.indexOf(arr[i][sortName][0].toLowerCase())
+    let witch = arr[i][sortName]?sortName:sortName2
+    if (arr[i][witch] && /^[a-zA-Z]/.test(arr[i][witch])) {
+      let a = LETTERS.indexOf(arr[i][witch][0].toLowerCase())
       if (a > -1) {
         arr[i]['en2zh'] = ZH[a]
-        arr[i]['le'] = arr[i][sortName][0]
+        arr[i]['le'] = arr[i][witch][0]
       } else {
-        let letter = arr[i][sortName][0]
+        let letter = arr[i][witch][0]
         let isIUV = 0
         switch (letter) {
+          case 'I':
           case 'i': iArr.push(arr[i]); isIUV = 1; break
+          case 'U':
           case 'u': uArr.push(arr[i]); isIUV = 1; break
+          case 'V':
           case 'v': vArr.push(arr[i]); isIUV = 1; break
         }
         if (isIUV) {
@@ -152,8 +160,8 @@ function main (arr, sortName, isTag = 1) {
 
   arr.sort(
     function compareFunction (param1, param2) {
-      let one = switchkey(param1, sortName)
-      let two = switchkey(param2, sortName)
+      let one = switchkey(param1, sortName, sortName2)
+      let two = switchkey(param2, sortName, sortName2)
       let r = one.localeCompare(two, 'zh-CN')
       return r
     }
