@@ -3,7 +3,7 @@ import sortzh from './sortzh'
 function switchkey (obj, sortName, sortName2) {
   let r
   let witch = obj[sortName]?sortName:sortName2
-  if (obj[sortName] && /^[a-zA-Z]/.test(obj[witch] ? obj[witch] : '没有')) {
+  if (obj[witch] && /^[a-zA-Z]/.test(obj[witch] ? obj[witch] : '没有')) {
     r = obj.en2zh
   } else {
     r = obj[witch]
@@ -51,7 +51,7 @@ function main (arr, [sortName, sortName2], isTag = 1) {
     function compareFunction (param1, param2) {
       let one = switchkey(param1, sortName, sortName2)
       let two = switchkey(param2, sortName, sortName2)
-      let r = one.localeCompare(two, 'zh-CN')
+      let r = (one || '9').localeCompare(two, 'zh-CN')
       return r
     }
   )
