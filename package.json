@@ -2,7 +2,7 @@
   "name": "mixed-sort",
   "shortname": "mixedsort",
   "root": "MSort",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "mixed-sort 是一款基于前端JavaScript中英文排序的插件，开发时应用于通讯录排序，也可用于其他场景。",
   "main": "src/index.js",
   "module": "src/index.js",
