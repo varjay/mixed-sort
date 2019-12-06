@@ -14,7 +14,7 @@ function switchkey (obj, sortName, sortName2) {
   return r
 }
 
-function main (arr, [sortName, sortName2], isTag = 1) {
+function main (arr, [sortName, sortName2], isTag = 1, tagRandomKey = '') {
   arr = arr.concat(sortzh)
   // 暂时无法对i u v 排序
   const LETTERS = 'abcdefghjklmnopqrstwxyz'.split('')
@@ -96,6 +96,11 @@ function main (arr, [sortName, sortName2], isTag = 1) {
     for (let i = arr.length - 1; i >= 0; i--) {
       if (arr[i].zh && arr[i + 1] && arr[i + 1].zh) {
         arr.splice(i, 1)
+      } else {
+        if (tagRandomKey && arr[i].zh) {
+          arr[i][tagRandomKey] = Math.random().toString()
+          arr[i]['isTag'] = 1
+        }
       }
     }
   } else {
