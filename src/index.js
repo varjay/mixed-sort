@@ -94,7 +94,7 @@ function main (arr, [sortName, sortName2], isTag = 1, tagRandomKey = '') {
   if (isTag) {
     // 删除空的项目
     for (let i = arr.length - 1; i >= 0; i--) {
-      if (arr[i].zh && arr[i + 1] && arr[i + 1].zh) {
+      if ((arr[i].zh && arr[i + 1] && arr[i + 1].zh) || (arr[i].zh && !arr[i + 1])) {
         arr.splice(i, 1)
       } else {
         if (tagRandomKey && arr[i].zh) {
@@ -113,6 +113,6 @@ function main (arr, [sortName, sortName2], isTag = 1, tagRandomKey = '') {
   return arr
 }
 
-main.Version = '0.0.1'
+main.Version = '1.0.0'
 
 export default main
